@@ -3,11 +3,6 @@
     <header class="bg-blue-600 text-white py-4 shadow">
       <div class="container mx-auto px-6 flex justify-between items-center">
         <h1 class="text-2xl font-semibold">Система электронной подписи</h1>
-        <nav class="space-x-4">
-          <RouterLink to="/" class="hover:underline">Главная</RouterLink>
-          <RouterLink to="/keys" class="hover:underline">Ключи</RouterLink>
-          <RouterLink to="/sign" class="hover:underline">Подписать</RouterLink>
-        </nav>
       </div> 
     </header>
 
