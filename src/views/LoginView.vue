@@ -1,8 +1,8 @@
 <template>
   <div class="register-container">
-    <h1>Регистрация</h1>
+    <h1>Авторизация</h1>
 
-    <form @submit.prevent="handleRegister">
+    <form @submit.prevent="handleAuthorization">
       <div class="form-group">
         <input
             v-model="username"
@@ -30,8 +30,8 @@
     <p v-if="errorMessage" class="success">{{ errorMessage }}</p>
 
     <p class="login-link">
-      Уже есть аккаунт?
-      <router-link to="/login">Зарегистрироваться</router-link>
+      Нету аккаунта?
+      <router-link to="/register">Зарегистрироваться</router-link>
     </p>
   </div>
 </template>
@@ -46,9 +46,9 @@ const password = ref("");
 const successMessage = ref("");
 const errorMessage = ref("");
 
-const handleRegister = async () => {
+const handleAuthorization = async () => {
   try {
-    const response = await axios.post("http://localhost:9090/api/v1/users/register", {
+    const response = await axios.post("http://localhost:9090/api/v1/users/login", {
       username: username.value,
       email: email.value,
       password: password.value,
