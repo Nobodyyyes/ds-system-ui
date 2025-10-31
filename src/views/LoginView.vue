@@ -27,7 +27,7 @@
     </form>
 
     <p v-if="successMessage" class="success">{{ successMessage }}</p>
-    <p v-if="errorMessage" class="success">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
     <p class="login-link">
       Нету аккаунта?
@@ -37,32 +37,30 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import { ref } from "vue";
 import axios from "axios";
 
 const username = ref("");
-const email = ref("");
 const password = ref("");
 const successMessage = ref("");
 const errorMessage = ref("");
 
 const handleAuthorization = async () => {
   try {
-    const response = await axios.post("http://localhost:9090/api/v1/users/login", {
-      username: username.value,
-      email: email.value,
-      password: password.value,
-    });
+    const response = await axios.post(
+        `http://localhost:9090/api/v1/users/login/username/${username.value}/password/${password.value}`
+    );
 
-    successMessage.value = "Регистрация прошла успешно!";
-    errorMessage.value = "";
-
-    username.value = "";
-    email.value = "";
-    password.value = "";
+    if (response.data === true) {
+      successMessage.value = "Вход выполнен успешно!";
+      errorMessage.value = "";
+    } else {
+      successMessage.value = "";
+      errorMessage.value = "Неверный логин или пароль!";
+    }
   } catch (error) {
     successMessage.value = "";
-    errorMessage.value = "Ошибка регистрации!";
+    errorMessage.value = "Ошибка соединения с сервером!";
   }
 };
 </script>
@@ -75,7 +73,7 @@ const handleAuthorization = async () => {
   border: 1px solid #ddd;
   border-radius: 12px;
   background: #4c4a4a;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 h1 {
   text-align: center;
@@ -118,4 +116,3 @@ button:hover {
   margin-top: 20px;
 }
 </style>
-    
