@@ -8,7 +8,7 @@
             v-model="username"
             id="username"
             type="text"
-            placeholder="Введите имя пользователя"
+            placeholder="Введите username"
             required
         />
       </div>
@@ -31,14 +31,17 @@
 
     <p class="login-link">
       Нету аккаунта?
-      <router-link to="/register">Зарегистрироваться</router-link>
+      <router-link to="/register" class="router-link-register">Зарегистрироваться</router-link>
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import {ref} from "vue";
 import axios from "axios";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 const username = ref("");
 const password = ref("");
@@ -54,6 +57,8 @@ const handleAuthorization = async () => {
     if (response.data === true) {
       successMessage.value = "Вход выполнен успешно!";
       errorMessage.value = "";
+
+      setTimeout(() => router.push("/home"), 1000);
     } else {
       successMessage.value = "";
       errorMessage.value = "Неверный логин или пароль!";
@@ -75,19 +80,23 @@ const handleAuthorization = async () => {
   background: #4c4a4a;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 h1 {
   text-align: center;
   margin-bottom: 24px;
 }
+
 .form-group {
   margin-bottom: 16px;
 }
+
 input {
   width: 70%;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ccc;
 }
+
 button {
   width: 70%;
   padding: 10px;
@@ -98,21 +107,34 @@ button {
   border-radius: 6px;
   cursor: pointer;
 }
+
 button:hover {
   background-color: #059669;
 }
+
 .success {
   color: green;
   text-align: center;
   margin-top: 10px;
 }
+
 .error {
   color: red;
   text-align: center;
   margin-top: 10px;
 }
+
 .login-link {
   text-align: center;
   margin-top: 20px;
+}
+
+.router-link-register {
+  color: white;
+  text-decoration: underline;
+}
+
+.router-link-register:hover {
+  color: #c1bdbd;
 }
 </style>

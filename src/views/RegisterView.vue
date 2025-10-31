@@ -1,5 +1,6 @@
 <template>
   <div class="register-container">
+    <router-link to="/login" class="router-link-login-back">← Назад</router-link>
     <h1>Регистрация</h1>
 
     <form @submit.prevent="handleRegister">
@@ -82,7 +83,24 @@ const password = ref("");
 const successMessage = ref("");
 const errorMessage = ref("");
 
+const checkUsernameExists = async (username: string) => {
+  try {
+    const response = await axios.get(`http://localhost:9090/api/v1/users/exists/username/${username}`);
+    return response.data === true;
+  } catch {
+    errorMessage.value = "Ошибка проверки username";
+    return true;
+  }
+}
+
 const handleRegister = async () => {
+
+  const exists = await checkUsernameExists(username.value);
+  if (exists) {
+    errorMessage.value = "Такой username уже существует!";
+    return;
+  }
+
   try {
     const response = await axios.post("http://localhost:9090/api/v1/users/register", {
       firstName: firstName.value,
@@ -176,5 +194,14 @@ button:hover {
   text-align: center;
   margin-top: 20px;
   color: white;
+}
+
+.router-link-login-back {
+  color: white;
+  margin-right: 330px;
+}
+
+.router-link-login-back:hover {
+  color: #c1bdbd;
 }
 </style>
