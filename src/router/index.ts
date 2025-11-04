@@ -7,6 +7,7 @@ import SignView from '../views/SignView.vue'
 import VerifyView from '../views/VerifyView.vue'
 import RegisterView from "../views/RegisterView.vue";
 import HomeView from "../views/HomeView.vue";
+import ProfileView from "../views/ProfileView.vue";
 
 const routes = [
     {path: '/', redirect: '/login'},
@@ -18,6 +19,7 @@ const routes = [
     {path: '/sign/:id', component: SignView},
     {path: '/verify/:id', component: VerifyView},
     {path: '/home', component: HomeView},
+    {path: '/profile', component: ProfileView},
 ]
 
 const router = createRouter({
