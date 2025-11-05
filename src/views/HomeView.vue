@@ -9,7 +9,7 @@
     </header>
 
     <main class="home-content">
-      <div class="card" @click="goTo('/keys/generate')">
+      <div class="card" @click="goTo('/keys')">
         <h2>🧩 Сгенерировать ключ</h2>
         <p>Создайте новый ключ электронной подписи</p>
       </div>
@@ -95,41 +95,47 @@ const logout = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 20px;
+
+  padding: 110px; /* или меньше, если нужно компактнее */
+
   color: #fff;
   background: linear-gradient(135deg, #1f2937, #526858);
-  min-height: 100vh;
-  border-radius: 50px;
+
+  /* блок не растягивается на весь экран */
+  width: 90%; /* ширина контейнера */
+  max-width: 1000px; /* максимальная ширина */
+  margin: 40px auto; /* одинаковый верхний и нижний отступ и центрирование */
+
+  border-radius: 20px; /* скругления */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* тень для визуального выделения */
 }
 
-.home-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
 
 .home-header h1 {
-  font-size: 2rem;
+  font-size: 1.8rem; /* чуть меньше */
   font-weight: 700;
 }
 
 .subtitle {
-  font-size: 1.1rem;
+  font-size: 1rem; /* меньше */
   color: #9ca3af;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .home-content {
   display: flex;
-  gap: 20px;
+  gap: 20px; /* меньше gap */
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px; /* расстояние от заголовка */
+  margin-bottom: 50px;
 }
 
 .card {
-  width: 250px;
+  width: 200px; /* меньше ширина */
   background: #374151;
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px; /* меньше padding */
   cursor: pointer;
   text-align: center;
   transition: all 0.3s ease;
@@ -137,21 +143,23 @@ const logout = () => {
 
 .card:hover {
   background: #4b5563;
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
 .card h2 {
-  margin-bottom: 10px;
+  font-size: 1.1rem; /* чуть меньше */
+  margin-bottom: 8px;
 }
 
 .home-footer {
-  margin-top: 40px;
+  margin-top: auto; /* всегда внизу */
+  padding: 20px 0;
 }
 
 .logout-btn {
   background: #ef4444;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 6px;
   color: white;
   font-weight: bold;
